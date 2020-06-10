@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  font-size: 1em;
+  color: black;
+  font-weight: normal;
+  text-decoration: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -o-text-size-adjust: 100%;
+  box-sizing: border-box; }
+
+header {
+  height: 144px;
+  text-align: center; }
+  header nav a {
+    text-transform: uppercase; }
+
+main {
+  height: 100vh;
+  background-size: calc((100vw + 1px)/26) calc((100vw + 1px)/26);
+  background: linear-gradient(90deg, red 1px, transparent 1px) -0.5px 0, #fff;
+  background-size: calc(100vw/26) 1px;
+  height: 100vh;
+  overflow: auto; }
+  main section {
+    display: grid;
+    background-color: black;
+    height: 100px;
+    width: calc(100vw - (((100vw)/26) * 2 + 1px));
+    margin: 0 auto;
+    margin-top: 1px; }
+
+.wrapper {
+  margin-top: 42px; }
+
+/*# sourceMappingURL=index__.css.map */

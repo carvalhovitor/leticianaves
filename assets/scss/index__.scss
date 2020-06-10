@@ -1,0 +1,47 @@
+$gridColor: #ff8369;
+$margin: 0;
+$moduleSide: calc((100vw + 1px)/26);
+
+
+
+@import 'reset';
+
+
+header {
+  height: 144px;
+
+  text-align: center;
+
+  nav a {
+    text-transform: uppercase;
+  }
+}
+
+main {
+  height: 100vh;
+  background-size: $moduleSide $moduleSide;
+  // background-position-x: -0.5px;
+  // background-position: center;
+  background: linear-gradient(90deg, red 1px, transparent 1px) -0.5px 0, #fff;
+  background-size: calc(100vw/26) 1px;
+  height: 100vh;
+  overflow: auto;
+
+  section {
+    display: grid;
+    background-color: black;
+    height: 100px;
+    // width: 100%;
+    width: calc(100vw - (((100vw)/26) * 2 + 1px));
+    margin: 0 auto;
+    margin-top: 1px;
+  }
+}
+
+.wrapper {
+  // padding-top: 42px;
+
+  margin-top: 42px;
+  // max-width: calc(100vw - $margin);
+  // margin: 0 auto;
+}
