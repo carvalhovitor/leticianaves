@@ -1,0 +1,37 @@
+fields:
+  text:
+    label: Sobre
+    width: 1/2
+    type: textarea
+    required: true
+  contact:
+    label: Contato
+    width: 1/2
+    type: textarea
+    required: true
+  professional:
+    label: Experiência profissional
+    width: 1/2
+    type: structure
+    fields:
+      date:
+        width: 1/4
+        label: Data
+        type: text
+      description:
+        width: 3/4
+        label: Descrição
+        type: text
+  education:
+    label: Educação
+    width: 1/2
+    type: structure
+    fields:
+      date:
+        width: 1/4
+        label: Data
+        type: text
+      description:
+        width: 3/4
+        label: Descrição
+        type: text

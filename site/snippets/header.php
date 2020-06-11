@@ -1,7 +1,9 @@
 <header>
     <nav>
-        <a>Portfólio</a> 
-        <a><?php snippet('logotype'); ?></a>
-        <a>Sobre</a>
+        <a <?= e($page->isHomePage(), 'class="active"') ?> href="/">Portfólio</a> 
+        <a class="logotype" href="/"><?php snippet('logotype'); ?></a>
+        <a <?= e(!$page->isHomePage(), 'class="active"') ?> href="/sobre">Sobre</a>
     </nav>
 </header>
+
+<main>

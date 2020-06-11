@@ -1,0 +1,17 @@
+status:
+  draft: Draft
+  listed: Published
+
+columns:
+  - width: 1/2
+    sections:
+      pages:
+        type: pages
+        headline: Projetos publicados
+        status: listed
+  - width: 1/2
+    sections:
+      drafts:
+        type: pages
+        headline: Rascunhos
+        status: draft

@@ -1,0 +1,17 @@
+Title: 36 Days of Type
+
+----
+
+Categories: book, visualid, package
+
+----
+
+Text: Texto de exemplo.
+
+----
+
+Files:
+
+- a-desumanizacao.jpg
+- admiravel-mundo-novo.jpg
+- nos.jpg
