@@ -225,37 +225,6 @@ main {
         padding-right: 6px;
       }
     }
-
-    &.cv {
-      padding: 0;
-      display: grid;
-      grid-column: 9 / span 11;
-      grid-row: 9 / span 10;
-      background-color: initial;
-
-      .cv-entry {
-        display: grid;
-        grid-template-columns: 3fr 8fr;
-        // background: ;
-        // background-color: $gridColor;
-        grid-gap: 3px;
-        
-        .date, .description {
-          padding: 1em;
-          background-color: white;
-        }
-
-        // .description {
-        //   border-left: 1px solid $gridColor;
-        // }
-
-        &:not(:last-child) {
-          border-bottom: 1px solid $gridColor;
-        }
-      }
-    }
-
-
   }
 }
 
@@ -284,11 +253,6 @@ main {
 
       &.title {
         grid-column-start: 2;
-        grid-row-start: 19;
-      }
-
-      &.cv {
-        grid-column-start: 3;
         grid-row-start: 19;
       }
      }

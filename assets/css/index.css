@@ -146,21 +146,6 @@ main {
       margin: 0 auto;
       writing-mode: vertical-lr;
       padding-right: 6px; }
-  .about .grid > section.cv {
-    padding: 0;
-    display: grid;
-    grid-column: 9 / span 11;
-    grid-row: 9 / span 10;
-    background-color: initial; }
-    .about .grid > section.cv .cv-entry {
-      display: grid;
-      grid-template-columns: 3fr 8fr;
-      grid-gap: 3px; }
-      .about .grid > section.cv .cv-entry .date, .about .grid > section.cv .cv-entry .description {
-        padding: 1em;
-        background-color: white; }
-      .about .grid > section.cv .cv-entry:not(:last-child) {
-        border-bottom: 1px solid #ff8369; }
 
 @media screen and (max-width: 1920px) {
   .grid, .grid-lock {
@@ -211,9 +196,6 @@ main {
     grid-column: 7 / span 9; }
   .about .grid > section.title {
     grid-column-start: 2;
-    grid-row-start: 19; }
-  .about .grid > section.cv {
-    grid-column-start: 3;
     grid-row-start: 19; } }
 @media screen and (max-width: 860px) {
   .grid, .grid-lock {
