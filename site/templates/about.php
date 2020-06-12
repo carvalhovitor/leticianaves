@@ -2,16 +2,14 @@
         
     <?php snippet('header'); ?>
 
-    <section class="grid">
-
         <section class="about-me">
-            <div class="about-me-wrapper">
+            <div class="about-me-wrapper text">
                 <?= $page->text()->kirbytext() ?>
             </div>
         </section>
 
         <section class="contact">
-            <div class="contact-wrapper">
+            <div class="contact-wrapper text">
                 <?= $page->contact()->kirbytext() ?>
             </div>
         </section>
@@ -23,7 +21,5 @@
         <section class="profile-02">
             <img src="assets/profile/ln-02.jpg">
         </section>
-
-    </section>
 
 <?php snippet('foot'); ?>

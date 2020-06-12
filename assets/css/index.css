@@ -18,6 +18,13 @@ body {
   font-size: 1.4em;
   line-height: 1.1; }
 
+#main {
+  overflow: hidden; }
+
+#anchor {
+  grid-column: 1 / -1;
+  grid-row-end: span 2; }
+
 .wrapper {
   margin: 0 auto;
   margin-top: 42px;
@@ -74,13 +81,17 @@ main {
 
 .grid {
   padding-top: 1px; }
+  .grid .text {
+    padding: 1em; }
   .grid * {
     z-index: 9;
     overflow: hidden; }
+  .grid > section:not([class^="profile"]),
+  .grid .project-info {
+    background-color: white; }
   .grid .project-card {
     grid-row-end: span 7; }
     .grid .project-card .project-info {
-      background: white;
       padding: 10px;
       margin-top: 1px; }
     .grid .project-card:nth-child(-n + 3) {
@@ -96,7 +107,7 @@ main {
 
 .grid, .grid-lock {
   grid-template-columns: repeat(23, 1fr);
-  grid-template-rows: repeat(40, calc(1920px/23)); }
+  grid-template-rows: repeat(200, calc(1920px/23)); }
 
 .grid .project-card {
   grid-column-end: span 7; }
@@ -113,12 +124,18 @@ main {
     grid-column-start: 2;
     grid-column-end: span 7; }
 
+.project .grid > section {
+  grid-column: 3 / span 8; }
+.project .grid .project-title {
+  grid-row-start: 2; }
+.project .grid .project-description {
+  grid-row: 3 / span 2; }
+.project .grid > .project-image {
+  grid-column-end: -3;
+  grid-row-end: span 14; }
+
 .about .grid > section {
   grid-row-start: 2; }
-  .about .grid > section:not([class^="profile"]) {
-    background-color: white; }
-  .about .grid > section div {
-    padding: 1em; }
   .about .grid > section.about-me, .about .grid > section.contact {
     grid-row-end: span 6;
     grid-column: 3 / span 4; }
@@ -150,7 +167,7 @@ main {
 @media screen and (max-width: 1920px) {
   .grid, .grid-lock {
     grid-template-columns: repeat(23, 1fr);
-    grid-template-rows: repeat(40, calc(100vw/23)); }
+    grid-template-rows: repeat(200, calc(100vw/23)); }
 
   .grid .project-card {
     grid-column-end: span 7; }
@@ -169,7 +186,7 @@ main {
 @media screen and (max-width: 1280px) {
   .grid, .grid-lock {
     grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(40, calc(100vw/16)); }
+    grid-template-rows: repeat(200, calc(100vw/16)); }
 
   .grid .project-card {
     grid-column-end: span 7; }
@@ -200,7 +217,7 @@ main {
 @media screen and (max-width: 860px) {
   .grid, .grid-lock {
     grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(40, calc(100vw/10)); }
+    grid-template-rows: repeat(200, calc(100vw/10)); }
 
   .grid .project-card {
     grid-column-end: span 8; }
@@ -229,6 +246,8 @@ main {
         padding: 0 30px;
         max-width: 500px; }
 
+  .grid > section {
+    grid-column: 2 / span 8 !important; }
   .grid .project-card {
     grid-row-end: span 8; }
     .grid .project-card img {
@@ -236,11 +255,8 @@ main {
     .grid .project-card .project-info {
       height: calc(100vw/10 * 2); }
 
-  .about .grid > section.about-me, .about .grid > section.contact {
-    grid-column-end: 10; }
   .about .grid > section.profile-01, .about .grid > section.profile-02 {
     grid-row-start: auto;
-    grid-column: 2 / span 8;
     margin-top: calc(100vw/10 + 1px); }
   .about .grid > section.profile-01 {
     grid-row-end: span 13; }

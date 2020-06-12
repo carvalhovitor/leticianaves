@@ -6,4 +6,6 @@
     </nav>
 </header>
 
-<main>
+<main id="main">
+
+<section class="grid">

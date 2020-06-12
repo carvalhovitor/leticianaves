@@ -1,3 +1,8 @@
+<div id="anchor"></div>
+
+            </section>
+
+            
             <?php snippet('grid'); ?>
 
         </main>
@@ -6,4 +11,4 @@
 
 </body>
 
-<script src="assets/js/index.js"></script>
+<script src="/assets/js/index.js"></script>

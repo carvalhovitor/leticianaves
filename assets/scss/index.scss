@@ -14,6 +14,16 @@ body {
   font-family: "Nassim Latin";
   font-size: 1.4em;
   line-height: 1.1;
+  // overflow: hidden;
+}
+
+#main {
+  overflow: hidden;
+}
+
+#anchor {
+  grid-column: 1 / -1;
+  grid-row-end: span 2;
 }
 
 .wrapper {
@@ -100,16 +110,24 @@ main {
 .grid {
   padding-top: 1px;
 
+  .text {
+    padding: 1em;
+  }
+
   * {
     z-index: 9;
     overflow: hidden;
+  }
+
+  & > section:not([class^="profile"]), 
+  .project-info {
+    background-color: white; 
   }
 
   .project-card {
     grid-row-end: span 7;
 
     .project-info {
-      background: white;
       padding: 10px;
       margin-top: 1px;
     }
@@ -134,10 +152,13 @@ main {
 @mixin grid($columnTotal, $columns, $viewport: 100vw) {
   .grid, .grid-lock {
     grid-template-columns: repeat($columnTotal, 1fr);
-    grid-template-rows: repeat(40, calc(#{$viewport}/#{$columnTotal})); // You need to change the for loop in home.php when changing this
+    grid-template-rows: repeat(200, calc(#{$viewport}/#{$columnTotal})); // You need to change the for loop in home.php when changing this
   }
 
   .grid {
+
+    // HOME PAGE
+
     .project-card {
       grid-column-end: span ($columnTotal - 2)/$columns;
 
@@ -169,20 +190,35 @@ main {
 
 @include grid(23, 3, $maxWidth);
 
-// ABOUT
+
+// PROJECT PAGE
+
+.project {
+  .grid {
+    & > section {
+      grid-column: 3 / span 8;
+    }
+
+    .project-title {
+      grid-row-start: 2;
+    }
+
+    .project-description {
+      grid-row: 3 / span 2;
+    }
+
+    & > .project-image {
+      grid-column-end: -3;
+      grid-row-end: span 14;
+    }
+  }
+}
+
+// ABOUT PAGE
 
 .about {
   .grid > section {
     grid-row-start: 2;
-
-    &:not([class^="profile"]) {
-      background-color: white;
-    }
-    
-    div {
-      padding: 1em;
-
-    }
 
     &.about-me, &.contact {
       grid-row-end: span 6;
@@ -215,7 +251,6 @@ main {
       justify-self: center;
       width: 100%;
       padding: 0;
-      
       
       p {
         padding-top: 1em;
@@ -283,6 +318,10 @@ main {
   }
 
   .grid {
+    & > section {
+      grid-column: 2 / span 8 !important;
+    }
+
     .project-card {
       grid-row-end: span 8;
 
@@ -297,24 +336,21 @@ main {
   }
 
   .about {
-    .grid > section {
-      &.about-me, &.contact {
-        grid-column-end: 10;
+    .grid {
+      & > section {
+        &.profile-01, &.profile-02 {
+          grid-row-start: auto;
+          margin-top: calc(100vw/10 + 1px);
+        }
+  
+        &.profile-01 {
+          grid-row-end: span 13;
+        }
+  
+        &.profile-02 {
+          grid-row-end: span 7;
+        }
       }
-
-      &.profile-01, &.profile-02 {
-        grid-row-start: auto;
-        grid-column: 2 / span 8;
-        margin-top: calc(100vw/10 + 1px);
-      }
-
-      &.profile-01 {
-        grid-row-end: span 13;
-      }
-
-      &.profile-02 {
-        grid-row-end: span 7;
-      }
-     }
+    }
   }
 }

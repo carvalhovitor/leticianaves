@@ -1,3 +1,6 @@
+title: Projects
+icon: 🏠
+
 status:
   draft: Draft
   listed: Published
@@ -6,12 +9,17 @@ columns:
   - width: 1/2
     sections:
       pages:
+        layout: cards
         type: pages
-        headline: Projetos publicados
+        headline: Projetos
         status: listed
   - width: 1/2
     sections:
       drafts:
+        layout: cards
         type: pages
+        create: project
         headline: Rascunhos
         status: draft
+        image:
+          back: white

@@ -3,6 +3,21 @@ var $ = function(c) {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+    var anchor = document.getElementById('anchor')
+        main = document.getElementById('main');
+        
+    function cropViewport() {
+        main.style.height = anchor.offsetTop + anchor.clientHeight + 'px';
+    }
+
+    cropViewport();
+
+    window.addEventListener('resize', function() {
+        cropViewport();
+    })
+
+    // document.body.style.height = anchor.getBoundingClientRect().top + window.scrollY +  'px';
+
     if (document.querySelector('.about')) {
         var grid = $('.grid'),
             aboutMe = $('.about-me'),
