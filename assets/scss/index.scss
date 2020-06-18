@@ -11,10 +11,9 @@ $maxWidth: 1920px;
 // GENERAL
 
 body {
-  font-family: "Nassim Latin";
-  font-size: 1.4em;
+  font-family: "Nassim Latin", serif;
+  font-size: 20px;
   line-height: 1.1;
-  // overflow: hidden;
 }
 
 #main {
@@ -28,20 +27,24 @@ body {
 
 .wrapper {
   margin: 0 auto;
-  margin-top: 42px;
   max-width: $maxWidth;
 }
 
-a:not(.logotype) {
+nav a span {
   padding-bottom: 3px;
   border-bottom: 1px solid transparent;
-  
-  &:hover, &.active {
-    border-color: black;
-  }
+
+    &:hover, &.active {
+      border-color: black;
+    }
 }
 
-h2, strong, .title {
+p a:hover {
+  // text-decoration: underline;
+  color: $gridColor;
+}
+
+h2, strong, *[class*="title"] {
   font-variant: all-small-caps;
 }
 
@@ -50,8 +53,9 @@ p + p {
 }
 
 img {
-  display: block;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 
@@ -59,7 +63,7 @@ img {
 
 header {
   text-align: center;
-  margin-bottom: 50px;
+  margin: 30px 0;
   font-family: obviously-wide, sans-serif;
 
   nav {
@@ -67,27 +71,34 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    font-size: 1.1rem;
+    font-size: .8em;
 
     a {
-      display: block;
       text-transform: uppercase;
       letter-spacing: .2em;
       margin: 1.5em 0;
+      width: 240px;
+      // width: 840px;
     }
 
     .logotype {
-      margin: 0 80px;
-    }
+      margin: 0 40px;
+  
+      svg {
+        .monoline {
+          stroke: black;
+          fill: none;
+          stroke-width: 1;
+        }
+  
+        &:hover {
+          fill: $gridColor;
 
-    svg {
-      stroke-width: 2;
-      stroke: black;
-      width: 380px;
+          .monoline {
 
-      &:hover {
-        fill: $gridColor;
-        stroke: $gridColor;
+            stroke: $gridColor;
+          }
+        }
       }
     }
   }
@@ -104,7 +115,6 @@ main {
 .grid, .grid-lock {
   display: grid;
   width: 100%;
-  grid-gap: 1px;
 }
 
 .grid {
@@ -116,12 +126,12 @@ main {
 
   * {
     z-index: 9;
-    overflow: hidden;
   }
 
-  & > section:not([class^="profile"]), 
-  .project-info {
-    background-color: white; 
+  & > section {
+    background-color: white;
+    border-bottom: 1px solid $gridColor; 
+    border-right: 1px solid $gridColor; 
   }
 
   .project-card {
@@ -129,7 +139,11 @@ main {
 
     .project-info {
       padding: 10px;
-      margin-top: 1px;
+
+      .categories {
+        font-style: italic;
+        // font-
+      }
     }
 
     &:nth-child(-n + 3) {
@@ -141,43 +155,56 @@ main {
 .grid-lock {
   position: absolute;
   top: 0;
-  background-color: $gridColor;
   border-top: 1px solid $gridColor;
 
   div {
-    background-color: white;
+    border-bottom: 1px solid $gridColor;
   }
 }
 
 @mixin grid($columnTotal, $columns, $viewport: 100vw) {
   .grid, .grid-lock {
     grid-template-columns: repeat($columnTotal, 1fr);
-    grid-template-rows: repeat(200, calc(#{$viewport}/#{$columnTotal})); // You need to change the for loop in home.php when changing this
+    grid-template-rows: repeat(400, calc(#{$viewport}/#{$columnTotal})); // You need to change the for loop in home.php when changing this
+  }
+
+  .grid-lock {
+    div:nth-child(n) {
+      border-right: none; // Only way to overwrite
+    }
+
+    div:not(:nth-child(#{$columnTotal}n)) {
+      border-right: 1px solid $gridColor;
+    }
   }
 
   .grid {
+    margin-top: calc(100vw/#{$columnTotal});
 
     // HOME PAGE
 
     .project-card {
       grid-column-end: span ($columnTotal - 2)/$columns;
+      grid-gap: 1px;
 
-      img {
-        max-height: calc(100% - #{$viewport}/#{$columnTotal} * 1 - 1px);
+      div {
+        background: white;
+        border-right: 1px solid $gridColor;
+      }
+
+      .project-cover {
+        height: calc(#{$viewport}/#{$columnTotal} * 6);
+        border-bottom: 1px solid $gridColor;
       }
 
       .project-info {
-        height: calc(#{$viewport}/#{$columnTotal} * 1);
+        height: calc(#{$viewport}/#{$columnTotal} * 1 - 1px);
       }
 
       &:nth-child(-n + #{$columns + 1}),
       &:nth-child(#{$columns + 1}n + 1) { // TODO
         grid-row-start: auto; // Resets where to start
         grid-column-start: auto;
-      }
-
-      &:nth-child(-n + #{$columns}) {
-        grid-row-start: 2;
       }
 
       &:nth-child(#{$columns}n + 1) {
@@ -188,29 +215,28 @@ main {
   }
 }
 
-@include grid(23, 3, $maxWidth);
+@include grid(26, 3, $maxWidth);
 
 
 // PROJECT PAGE
 
 .project {
-  .grid {
-    & > section {
-      grid-column: 3 / span 8;
-    }
+  section {
+    grid-column: 3 / span 8;
+  }
 
-    .project-title {
-      grid-row-start: 2;
-    }
+  .project-image {
+    grid-column-end: -3;
+    grid-row-end: span 15;
+  }
+}
 
-    .project-description {
-      grid-row: 3 / span 2;
-    }
+.project-description-wrapper {
+  grid-row: 2 / span 2;
 
-    & > .project-image {
-      grid-column-end: -3;
-      grid-row-end: span 14;
-    }
+  p + p {
+    text-indent: 0;
+    margin-top: 1em;
   }
 }
 
@@ -218,16 +244,13 @@ main {
 
 .about {
   .grid > section {
-    grid-row-start: 2;
-
-    &.about-me, &.contact {
-      grid-row-end: span 6;
+    &.about-me-wrapper, &.contact-wrapper {
+      grid-row-start: 1;
       grid-column: 3 / span 4;
     }
 
-    &.contact {
+    &.contact-wrapper {
       grid-row-start: auto;
-      grid-row-end: span 2;
 
       p + p {
         text-indent: 0;
@@ -235,55 +258,53 @@ main {
       }
     }
 
+    &[class^="profile"] {
+      grid-row-start: 1; 
+      grid-row-end: span 8;
+    }
+
     &.profile-01 {
-      grid-column: 8 / span 4;
-      grid-row-end: span 6;
+      grid-column: 8 / span 5;
     }
     
     &.profile-02 {
-      grid-column: 13 / span 9;
-      grid-row-end: span 6;
-    }
-
-    &.title {
-      grid-column: 8;
-      grid-row: 9 / span 10;
-      justify-self: center;
-      width: 100%;
-      padding: 0;
-      
-      p {
-        padding-top: 1em;
-        height: 100%;
-        margin: 0 auto;
-        writing-mode: vertical-lr;
-        padding-right: 6px;
-      }
+      grid-column: 14 / span 11;
     }
   }
 }
 
 @media screen and (max-width: $maxWidth) {
-  @include grid(23, 3);
+  @include grid(26, 3);
 }
 
-@media screen and (max-width: 1280px) {
-  @include grid(16, 2);
+@media screen and (max-width: 1600px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  @include grid(18, 2);
 
   .about {
     .grid > section {
-      &.about-me, &.contact {
-        grid-column-start: 2;
+      &.about-me-wrapper, &.contact-wrapper {
+        grid-column: 2 / span 5;
+      }
+
+      &[class^="profile"] {
+        grid-column-start: 8
       }
 
       &.profile-01 {
-        grid-column: 7 / span 6;
+        grid-column-end: span 6;
         grid-row-end: span 9;
       }
 
       &.profile-02 {
-        grid-row-start: 12;
-        grid-column: 7 / span 9;
+        grid-column-end: span 10;
+        grid-row-start: 11;
+        grid-row-end: span 7;
       }
 
       &.title {
@@ -292,13 +313,19 @@ main {
       }
      }
   }
+
+  .project {
+    .project-image {
+      grid-row-end: span 10;
+    }
+  }
 }
 
 @media screen and (max-width: 860px) {
   @include grid(10, 1);
 
   body {
-    font-size: 1.1em;
+    font-size: 20px;
   }
 
   header {
@@ -319,19 +346,30 @@ main {
 
   .grid {
     & > section {
-      grid-column: 2 / span 8 !important;
+      grid-column: 2 / -2 !important;
     }
 
     .project-card {
       grid-row-end: span 8;
 
-      img {
-        max-height: calc(100% - 100vw/10 * 2 - 2px);
-      }
-
       .project-info {
         height: calc(100vw/10 * 2);
+        border-bottom: 1px solid $gridColor;
       }
+    }
+  }
+
+  .project {
+    .project-title {
+      grid-row: 1 / span 2;
+    }
+
+    .project-description-wrapper {
+      grid-row-start: 3;
+    }
+
+    .project-image {
+      grid-row-end: span 5;
     }
   }
 
@@ -340,7 +378,7 @@ main {
       & > section {
         &.profile-01, &.profile-02 {
           grid-row-start: auto;
-          margin-top: calc(100vw/10 + 1px);
+          // margin-top: calc(100vw/10 + 1px);
         }
   
         &.profile-01 {
@@ -352,5 +390,11 @@ main {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 460px) {
+  body {
+    font-size: 16px;
   }
 }

@@ -1,8 +1,8 @@
 <header>
     <nav>
-        <a <?= e($page->isHomePage(), 'class="active"') ?> href="/">Portfólio</a> 
+        <a href="/"><span <?= e($page->isHomePage(), 'class="active"') ?>>Portfólio</span></a> 
         <a class="logotype" href="/"><?php snippet('logotype'); ?></a>
-        <a <?= e(!$page->isHomePage(), 'class="active"') ?> href="/sobre">Sobre</a>
+        <a href="/sobre"><span <?= e($page->is('sobre'), 'class="active"') ?>>Sobre</span></a>
     </nav>
 </header>
 

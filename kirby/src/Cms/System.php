@@ -6,7 +6,7 @@ use Kirby\Data\Json;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\PermissionException;
-use Kirby\Http\Remote;
+// use Kirby\Http\Remote;
 use Kirby\Http\Uri;
 use Kirby\Http\Url;
 use Kirby\Toolkit\Dir;

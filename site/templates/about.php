@@ -2,14 +2,14 @@
         
     <?php snippet('header'); ?>
 
-        <section class="about-me">
-            <div class="about-me-wrapper text">
+        <section class="about-me-wrapper">
+            <div class="about-me text">
                 <?= $page->text()->kirbytext() ?>
             </div>
         </section>
 
-        <section class="contact">
-            <div class="contact-wrapper text">
+        <section class="contact-wrapper">
+            <div class="contact text">
                 <?= $page->contact()->kirbytext() ?>
             </div>
         </section>

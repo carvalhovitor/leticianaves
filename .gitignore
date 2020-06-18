@@ -39,4 +39,4 @@ Icon
 # License
 # ---------------
 /site/config/.license
-content/
+/content/*

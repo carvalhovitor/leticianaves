@@ -6,13 +6,14 @@
         <?= $page->title(); ?>
     </section>
 
-    <section class="project-description">
-        <div class="project-description-wrapper text">
+    <section class="project-description-wrapper">
+        <div class="project-description text">
             <?= $page->text()->kirbyText(); ?>
         </div>
     </section>
 
-    <?php foreach ($page->images() as $image): ?>
+
+    <?php foreach ($gallery as $image): ?>
         <section class="project-image">
             <?= $image ?>
         </section>
