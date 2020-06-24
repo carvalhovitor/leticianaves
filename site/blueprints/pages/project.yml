@@ -15,9 +15,7 @@ columns:
         min: 1
         size: small
         image:
-          ratio: 18/14
-
-          # 12/8
+          cover: true
 
   - width: 1/3
     fields:

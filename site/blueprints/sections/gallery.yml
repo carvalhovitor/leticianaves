@@ -1,0 +1,7 @@
+type: pages
+headline: Projects
+parent: kirby.page("portfolio")
+size: tiny
+layout: cards
+image:
+  cover: true

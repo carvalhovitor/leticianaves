@@ -1,3 +1,14 @@
 title: Site
-preset: pages
-unlisted: true
+
+columns:
+  - width: 1/2
+    sections:
+      gallery: sections/gallery
+
+  - width: 1/2
+    sections:
+      pages:
+        type: pages
+        status: listed
+        image:
+            back: white
