@@ -1,3 +1,0 @@
-[submodule "site/plugins/kirby-minify-html"]
-	path = site/plugins/kirby-minify-html
-	url = https://github.com/afbora/kirby-minify-html.git

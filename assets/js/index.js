@@ -30,7 +30,7 @@ const site = {
 
         updateColumnCount();
 
-        let smallMatch = window.matchMedia('(max-width: 860px)'),
+        let smallMatch = window.matchMedia('(max-width: 767px)'),
             mediumMatch = window.matchMedia('(max-width: 1200px)');
 
         smallMatch.addListener(updateColumnCount);
@@ -62,7 +62,7 @@ const site = {
             main = document.getElementById('main');
 
         function cropViewport() {
-            var viewportHeight = window.innerHeight,
+            let viewportHeight = window.innerHeight,
                 mainHeight = anchor.offsetTop + anchor.clientHeight;
 
             main.style.height = (viewportHeight > mainHeight ? viewportHeight : mainHeight) + 'px';
@@ -74,7 +74,7 @@ const site = {
 
         function getElementsToResize() {
             if ($('.about')) {
-                return {'.about-me' : true, '.contact' : window.innerWidth < 860};
+                return {'.about-me' : true, '.contact' : window.innerWidth < 767};
             }
 
             return {'.project-description' : true};

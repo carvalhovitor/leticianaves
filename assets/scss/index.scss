@@ -1,23 +1,15 @@
-$gridColor: #ff8369;
-$margin: 0;
-$units: 26;
-$contentSpace: $units - 2;
-$moduleSide: 100vw/$units;
-$maxWidth: 1920px;
-
 @import 'reset';
 @import url("https://use.typekit.net/ald5jdy.css");
+
+$gridColor: #ff8369;
+$maxWidth: 1920px;
 
 // GENERAL
 
 body {
-  font-family: "Nassim Latin", serif;
+  font-family: nassim-latin, Georgia, serif;
   font-size: 20px;
   line-height: 1.1;
-}
-
-#main {
-  overflow: hidden;
 }
 
 #anchor {
@@ -30,26 +22,25 @@ body {
   max-width: $maxWidth;
 }
 
-nav a span {
-  padding-bottom: 3px;
-  border-bottom: 1px solid transparent;
-
-    &:hover, &.active {
-      border-color: black;
-    }
+main {
+  position: relative;
+  overflow: hidden;
 }
 
 p a:hover {
-  // text-decoration: underline;
   color: $gridColor;
-}
-
-h2, strong, *[class*="title"] {
-  font-variant: all-small-caps;
 }
 
 p + p {
   text-indent: 1em;
+}
+
+.text {
+  padding: 1em;
+}
+
+h2, strong, *[class*="title"] {
+  font-variant: all-small-caps;
 }
 
 img {
@@ -58,13 +49,90 @@ img {
   object-fit: cover;
 }
 
+// GRID
+
+.grid, .grid-lock {
+  display: grid;
+  width: 100%;
+}
+
+.grid {
+  padding-top: 1px;
+
+  & > section {
+    background: white;
+    border-right: 1px solid $gridColor;
+    border-bottom: 1px solid $gridColor
+  }
+}
+
+.grid-lock {
+  position: absolute;
+  top: 0;
+  z-index: -9;
+  border-top: 1px solid $gridColor;
+
+  div {
+    border-bottom: 1px solid $gridColor;
+  }
+}
+
+// MIXIN
+
+@mixin grid($columnTotal, $columns, $viewport: 100vw) {
+  .grid, .grid-lock {
+    grid-template-columns: repeat($columnTotal, 1fr);
+    grid-template-rows: repeat(400, calc(#{$viewport}/#{$columnTotal})); // You need to change the for loop in home.php when changing this
+  }
+
+  .grid {
+    margin-top: calc(100vw/#{$columnTotal});
+  }
+
+  .grid-lock {
+    div:nth-child(n) {
+      border-right: none; // Only way to overwrite
+    }
+
+    div:not(:nth-child(#{$columnTotal}n)) {
+      border-right: 1px solid $gridColor;
+    }
+  }
+
+  // HOME PAGE MIXIN
+
+  .home {
+    .project-card {
+      grid-column-end: span ($columnTotal - 2)/$columns;
+
+      .project-cover {
+        height: calc(#{$viewport}/#{$columnTotal} * 6);
+      }
+
+      .project-info {
+        height: calc(#{$viewport}/#{$columnTotal} * 1 - 1px);
+      }
+
+      &:nth-child(-n + #{$columns + 1}),
+      &:nth-child(#{$columns + 1}n + 1) {
+        grid-row-start: auto; // Resets where to start
+        grid-column-start: auto;
+      }
+
+      &:nth-child(#{$columns}n + 1) {
+        grid-column-start: 2;
+        grid-column-end: span ($columnTotal - 2)/$columns;
+      }
+    }
+  }
+}
 
 // HEADER NAVIGATION
 
 header {
   text-align: center;
   margin: 30px 0;
-  font-family: obviously-wide, sans-serif;
+  font-family: obviously-wide, Helvetica, sans-serif;
 
   nav {
     display: flex;
@@ -76,12 +144,21 @@ header {
     a {
       text-transform: uppercase;
       letter-spacing: .2em;
-      margin: 1.5em 0;
-      width: 240px;
-      // width: 840px;
+      margin: 1.75em 0;
+      max-width: 240px;
+
+      span {
+        padding-bottom: 3px;
+        border-bottom: 1px solid transparent;
+    
+        &:hover, &.active {
+          border-color: black;
+        }
+      }
     }
 
     .logotype {
+      width: 240px;
       margin: 0 40px;
   
       svg {
@@ -95,7 +172,6 @@ header {
           fill: $gridColor;
 
           .monoline {
-
             stroke: $gridColor;
           }
         }
@@ -104,119 +180,34 @@ header {
   }
 }
 
-// MAIN
+// HOME PAGE
 
-main {
-  position: relative;
-}
-
-// GRID
-
-.grid, .grid-lock {
-  display: grid;
-  width: 100%;
-}
-
-.grid {
-  padding-top: 1px;
-
-  .text {
-    padding: 1em;
-  }
-
-  * {
-    z-index: 9;
-  }
-
-  & > section {
-    background-color: white;
-    border-bottom: 1px solid $gridColor; 
-    border-right: 1px solid $gridColor; 
-  }
-
+.home {
   .project-card {
     grid-row-end: span 7;
 
-    .project-info {
-      padding: 10px;
-
-      .categories {
-        font-style: italic;
-        // font-
-      }
+    &:hover .project-cover {
+      opacity: .75;
     }
 
-    &:nth-child(-n + 3) {
-      grid-row-start: 2;
-    }
-  }
-}
-
-.grid-lock {
-  position: absolute;
-  top: 0;
-  border-top: 1px solid $gridColor;
-
-  div {
-    border-bottom: 1px solid $gridColor;
-  }
-}
-
-@mixin grid($columnTotal, $columns, $viewport: 100vw) {
-  .grid, .grid-lock {
-    grid-template-columns: repeat($columnTotal, 1fr);
-    grid-template-rows: repeat(400, calc(#{$viewport}/#{$columnTotal})); // You need to change the for loop in home.php when changing this
-  }
-
-  .grid-lock {
-    div:nth-child(n) {
-      border-right: none; // Only way to overwrite
-    }
-
-    div:not(:nth-child(#{$columnTotal}n)) {
+    div {
+      background: white;
       border-right: 1px solid $gridColor;
     }
-  }
 
-  .grid {
-    margin-top: calc(100vw/#{$columnTotal});
-
-    // HOME PAGE
-
-    .project-card {
-      grid-column-end: span ($columnTotal - 2)/$columns;
-      grid-gap: 1px;
-
-      div {
-        background: white;
-        border-right: 1px solid $gridColor;
-      }
-
-      .project-cover {
-        height: calc(#{$viewport}/#{$columnTotal} * 6);
-        border-bottom: 1px solid $gridColor;
-      }
-
-      .project-info {
-        height: calc(#{$viewport}/#{$columnTotal} * 1 - 1px);
-      }
-
-      &:nth-child(-n + #{$columns + 1}),
-      &:nth-child(#{$columns + 1}n + 1) { // TODO
-        grid-row-start: auto; // Resets where to start
-        grid-column-start: auto;
-      }
-
-      &:nth-child(#{$columns}n + 1) {
-        grid-column-start: 2;
-        grid-column-end: span ($columnTotal - 2)/$columns;
+    .project-cover {
+      border-bottom: 1px solid $gridColor;
+    }
+  
+    .project-info {
+      padding: 10px;
+  
+      .categories {
+        font-style: italic;
       }
     }
   }
 }
-
-@include grid(26, 3, $maxWidth);
-
 
 // PROJECT PAGE
 
@@ -242,36 +233,38 @@ main {
 
 // ABOUT PAGE
 
-.about {
-  .grid > section {
-    &.about-me-wrapper, &.contact-wrapper {
-      grid-row-start: 1;
-      grid-column: 3 / span 4;
-    }
+.about .grid > section {
+  &.about-me-wrapper, &.contact-wrapper {
+    grid-row-start: 1;
+    grid-column: 3 / span 4;
+  }
 
-    &.contact-wrapper {
-      grid-row-start: auto;
+  &.contact-wrapper {
+    grid-row-start: auto;
 
-      p + p {
-        text-indent: 0;
-        margin-top: 1.1em;
-      }
-    }
-
-    &[class^="profile"] {
-      grid-row-start: 1; 
-      grid-row-end: span 8;
-    }
-
-    &.profile-01 {
-      grid-column: 8 / span 5;
-    }
-    
-    &.profile-02 {
-      grid-column: 14 / span 11;
+    p + p {
+      text-indent: 0;
+      margin-top: 1.1em;
     }
   }
+
+  &[class^="profile"] {
+    grid-row-start: 1; 
+    grid-row-end: span 8;
+  }
+
+  &.profile-01 {
+    grid-column: 8 / span 5;
+  }
+  
+  &.profile-02 {
+    grid-column: 14 / span 11;
+  }
 }
+
+// MEDIA QUERIES
+
+@include grid(26, 3, $maxWidth);
 
 @media screen and (max-width: $maxWidth) {
   @include grid(26, 3);
@@ -286,77 +279,74 @@ main {
 @media screen and (max-width: 1200px) {
   @include grid(18, 2);
 
-  .about {
-    .grid > section {
-      &.about-me-wrapper, &.contact-wrapper {
-        grid-column: 2 / span 5;
-      }
+  // PROJECT PAGE
 
-      &[class^="profile"] {
-        grid-column-start: 8
-      }
-
-      &.profile-01 {
-        grid-column-end: span 6;
-        grid-row-end: span 9;
-      }
-
-      &.profile-02 {
-        grid-column-end: span 10;
-        grid-row-start: 11;
-        grid-row-end: span 7;
-      }
-
-      &.title {
-        grid-column-start: 2;
-        grid-row-start: 19;
-      }
-     }
+  .project .project-image {
+    grid-row-end: span 10;
   }
 
-  .project {
-    .project-image {
-      grid-row-end: span 10;
+  // ABOUT PAGE
+
+  .about .grid > section {
+    &.about-me-wrapper, &.contact-wrapper {
+      grid-column: 2 / span 5;
+    }
+
+    &[class^="profile"] {
+      grid-column-start: 8
+    }
+
+    &.profile-01 {
+      grid-column-end: span 6;
+      grid-row-end: span 9;
+    }
+
+    &.profile-02 {
+      grid-column-end: span 10;
+      grid-row-start: 11;
+      grid-row-end: span 7;
+    }
+
+    &.title {
+      grid-column-start: 2;
+      grid-row-start: 19;
     }
   }
 }
 
 @media screen and (max-width: 860px) {
+  body {
+    font-size: 16px;
+  }
+
+  // HOME PAGE
+
+  .home .project-card .project-info {
+    padding: 6px;
+  }
+}
+
+@media screen and (max-width: 767px) {
   @include grid(10, 1);
 
   body {
     font-size: 20px;
   }
 
-  header {
-    nav {
-      font-size: 1rem;
+  // NAVIGATION
 
-      .logotype, .logotype svg {
-        width: 100%;
-        margin: 0;
-
-        svg {
-          padding: 0 30px;
-          max-width: 500px;
-        }
-      }
+  header nav {
+    font-size: 1rem;
+    flex-direction: column;
+    
+    .logotype svg {
+      max-width: 100%;
+      padding: 0;
     }
   }
 
-  .grid {
-    & > section {
-      grid-column: 2 / -2 !important;
-    }
-
-    .project-card {
-      grid-row-end: span 8;
-
-      .project-info {
-        height: calc(100vw/10 * 2);
-        border-bottom: 1px solid $gridColor;
-      }
-    }
+  .grid > section {
+    grid-column: 2 / -2 !important;
   }
 
   .project {
@@ -373,28 +363,44 @@ main {
     }
   }
 
-  .about {
-    .grid {
-      & > section {
-        &.profile-01, &.profile-02 {
-          grid-row-start: auto;
-          // margin-top: calc(100vw/10 + 1px);
-        }
-  
-        &.profile-01 {
-          grid-row-end: span 13;
-        }
-  
-        &.profile-02 {
-          grid-row-end: span 7;
-        }
-      }
+  .about .grid > section {
+    &.profile-01, &.profile-02 {
+      grid-row-start: auto;
+    }
+
+    &.profile-01 {
+      grid-row-end: span 13;
+    }
+
+    &.profile-02 {
+      grid-row-end: span 7;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home .project-card {
+    grid-row-end: span 8;
+
+    .project-info {
+      height: calc(100vw/10 * 2);
+      border-bottom: 1px solid $gridColor;
     }
   }
 }
 
 @media screen and (max-width: 460px) {
   body {
-    font-size: 16px;
+    font-size: 18px;
+  }
+}
+
+@media (hover: none) {
+  .home {
+    .project-card {
+      &:hover .project-cover {
+        opacity: 1;
+      }
+    }
   }
 }

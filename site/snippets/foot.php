@@ -11,4 +11,4 @@
 
 </body>
 
-<script src="/assets/js/index.js"></script>
+<?= js('assets/js/index.min.js'); ?>

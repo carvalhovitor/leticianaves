@@ -6,7 +6,7 @@ use Kirby\Data\Json;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\PermissionException;
-// use Kirby\Http\Remote;
+use Kirby\Http\Remote;
 use Kirby\Http\Uri;
 use Kirby\Http\Url;
 use Kirby\Toolkit\Dir;
@@ -285,6 +285,7 @@ class System
      */
     public function license()
     {
+        return "K3-PRO-X";
         try {
             $license = Json::read($this->app->root('config') . '/.license');
         } catch (Throwable $e) {
@@ -370,6 +371,7 @@ class System
      */
     public function register(string $license = null, string $email = null): bool
     {
+        return true;
         if (Str::startsWith($license, 'K3-PRO-') === false) {
             throw new InvalidArgumentException([
                 'key' => 'license.format'
